@@ -5,11 +5,6 @@ public class LibroDigital extends Productos{
 	private String formato;
 	private String tamanoArchivo;
 	private boolean proteccionDrm;
-	
-	public LibroDigital() {
-		super();
-		
-	}
 
 	public LibroDigital(int codigo, String nombre, double precio,String formato,
 			            String tamanoArchivo,boolean proteccionDrm) {

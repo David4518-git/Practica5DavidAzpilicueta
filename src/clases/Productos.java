@@ -1,19 +1,16 @@
 package clases;
 
+import java.util.ArrayList;
+
 public class Productos {
 	
 	private int codigo;
 	private String nombre;
 	private double precio;
 	Cliente cliente;
+    ArrayList<Productos> listaProductos;
 	
 	
-	public Productos() {
-		
-		this.codigo=0;
-		this.nombre="";
-		this.precio=0.0;
-	}
 	
 	public Productos(int codigo, String nombre, double precio) {
 		
@@ -55,12 +52,30 @@ public class Productos {
 		this.cliente = cliente;
 	}
 
-	@Override
-	public String toString() {
-		
-		return "Productos -> codigo= " + codigo + ","
-		+ " nombre= " + nombre + ", precio= " + precio;
+	public ArrayList<Productos> getListaProductos() {
+		return listaProductos;
 	}
 
+	public void setListaProductos(ArrayList<Productos> listaProductos) {
+		this.listaProductos = listaProductos;
+	}
+	
+	@Override
+	public String toString() {
+		return "Productos [codigo=" + codigo + ", nombre=" + nombre + ", precio=" + precio + ", cliente=" + cliente
+				+ ", listaProductos=" + listaProductos + "]";
+	}
+	
+	//Calcula el precio de todos los productos de la tienda
+
+	public double precioProductos () {
+		
+		double precioTotal=0;
+		for (Productos producto : listaProductos) {
+			precioTotal+=producto.getPrecio();
+		}
+		
+		return precioTotal;
+	}
 	
 }

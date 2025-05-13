@@ -6,15 +6,11 @@ public class LibroFisico extends Productos {
 	private String tipoEncuadernado;
 	private double peso;
 	
-	
-	public LibroFisico() {
-		super();
-		
-	}
 
 	public LibroFisico(int codigo, String nombre, double precio,int numeroPaginas,
 		               String tipoEncuadernado, double peso) {
 		super(codigo, nombre, precio);
+		
 		this.numeroPaginas=numeroPaginas;
 		this.tipoEncuadernado=tipoEncuadernado;
 		this.peso=peso;
@@ -51,8 +47,20 @@ public class LibroFisico extends Productos {
 				+ peso + ", toString()=" + super.toString() + "]";
 	}
 
+	// Metodo que le dices el nombre del libro y te dice el precio
+	
+	public LibroFisico precioSegunLibro(String nombre) {
+		
+		for (Productos productos : listaProductos) {
+			if(productos!=null) {
+				if(productos.getNombre().equalsIgnoreCase(nombre)){
+					
+					return productos.getPrecio();
+				}
+			}
+		}
+		
+	}
 	
 	
-	
-
 }

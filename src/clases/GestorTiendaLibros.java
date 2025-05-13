@@ -19,9 +19,9 @@ public class GestorTiendaLibros {
 
 	}
 
-	public void altaCliente(String nombre, String dni, String email) {
+	public void altaCliente(String nombre, String dni, String email, int edad) {
 
-		Cliente nuevoCliente = new Cliente(nombre, dni, email);
+		Cliente nuevoCliente = new Cliente(nombre, dni, email,edad);
 		listaClientes.add(nuevoCliente);
 	}
 
@@ -126,6 +126,8 @@ public class GestorTiendaLibros {
 
 		return null;
 	}
+	
+	// Eliminar libroFisico?
 
 	public void altaLibroDigital(int codigo, String nombre, double precio, String formato, String tamanoArchivo,
 			boolean proteccionDrm) {
@@ -158,5 +160,7 @@ public class GestorTiendaLibros {
 
 		return null;
 	}
+	
+	//Eliminar LibroDigital?
 
 }
