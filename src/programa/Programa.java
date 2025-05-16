@@ -1,47 +1,123 @@
 package programa;
 
-import clases.GestorTiendaLibros;
+import java.util.Scanner;
 
+import clases.Cliente;
+import clases.GestorTiendaLibros;
+import clases.Productos;
+/**
+ * Metodo main con el menu
+ * Consta de 9 cases donde se iran dando de alta, buscando, listando y eliminando 
+ * tanto Clientes como Productos
+ * @author David
+ *
+ */
 public class Programa {
 
 	public static void main(String[] args) {
-		System.out.println("Creamos una tienda");
-		GestorTiendaLibros productos = new GestorTiendaLibros();
-		System.out.println("Creamos tres productos");
-		productos.altaProducto(01, "Libro1", 8.77);
-		productos.altaProducto(02, "Libro2", 10.56);
-		productos.altaProducto(03, "Libro3", 12.6);
-		productos.listarProducto();
-		System.out.println();
+		GestorTiendaLibros gestor = new GestorTiendaLibros();
 
-		System.out.println("Buscamos un producto 02");
-		productos.buscarProductos(02);
+		Scanner sc = new Scanner(System.in);
+		int opcion;
 
-		System.out.println();
-		System.out.println("Creamos 2 clientes");
-		productos.altaCliente("Raul", "537846393A", "Raulmartinez2@gmail.com");
-		productos.altaCliente("Daniel", "28963494B", "Danielfernandez@gmail4.com");
-		productos.listarCliente();
-		System.out.println();
+		do {
+			System.out.println("-------------Menu de Opciones------------------");
+			System.out.println("1 - Alta Cliente");
+			System.out.println("2 - Alta Libro Fisico");
+			System.out.println("3 - Alta Libro Digital");
+			System.out.println("4 - Buscar Cliente");
+			System.out.println("5 - Buscar Libro");
+			System.out.println("6 - Listar Clientes");
+			System.out.println("7 - Listar Libros");
+			System.out.println("8 - Eliminar Cliente");
+			System.out.println("9 - Eliminar Libro");
+			System.out.println("10 - Salir");
+			System.out.print("Elige una opcion: ");
+			opcion = sc.nextInt();
 
-		System.out.println("Buscamos a el cliente Raul");
-		productos.buscarClientes("537846393A");
+			switch (opcion) {
+			case 1:
 
-		System.out.println();
-		System.out.println("Creamos tres Libros fisico");
-		productos.altaLibroFisico(04, "Libro4", 22, 200, "Tapa Blanda", 1.5);
-		productos.altaLibroFisico(05, "Libro5", 18.65, 120, "Tapa Dura", 1);
-		productos.altaLibroFisico(06, "Libro6", 15.45, 150, "Anillas", 1.25);
-		productos.listarLibroFisico();
-		
-		System.out.println();
-		productos.buscarLibrosFisicos(05);
-		System.out.println();
-		
-		System.out.println("Creamos tres libros digitales");
-		productos.altaLibroDigital(07, "Libro7", 13.57, "MOBI", "500KB", true);
-		productos.altaLibroDigital(07, "Libro7", 13.57, "MOBI", "500KB", true);
+				gestor.altaCliente("Carlos", "555C", "carlos@mail.com", 40);
+				System.out.println("Cliente Carlos dado de alta");
+				break;
 
+			case 2:
+
+				Cliente cliente1 = gestor.buscarCliente("555C");
+				if (cliente1 == null) {
+					System.out.println("Cliente no encontrado para asignar libro");
+				} else {
+					gestor.altaLibroFisico(101, "El Quijote", 30.0, cliente1, 500, "Tapa dura", 1.8);
+					System.out.println("Libro fisico 'El Quijote' dado de alta.");
+				}
+				break;
+
+			case 3:
+
+				Cliente cliente2 = gestor.buscarCliente("555C");
+				if (cliente2 == null) {
+					System.out.println("Cliente no encontrado para asignar libro digital.");
+				} else {
+					gestor.altaLibroDigital(202, "Rebelion en la Granja", 15.0, cliente2, "PDF", "5MB", true);
+					System.out.println("Libro digital 'Rebelion en la Granja' dado de alta.");
+				}
+				break;
+
+			case 4:
+
+				Cliente cliente = gestor.buscarCliente("555C");
+				if (cliente != null) {
+					System.out.println("Cliente encontrado: " + cliente);
+				} else {
+					System.out.println("Cliente no encontrado");
+				}
+				break;
+
+			case 5:
+
+				Productos productos = gestor.buscarLibro(101);
+				if (productos != null) {
+					System.out.println("Libro encontrado: " + productos);
+				} else {
+					System.out.println("Libro no encontrado");
+				}
+				break;
+
+			case 6:
+
+				System.out.println("Listado de clientes:");
+				gestor.listarClientes();
+				break;
+
+			case 7:
+
+				System.out.println("Listado de libros:");
+				gestor.listarLibros();
+				break;
+
+			case 8:
+
+				gestor.eliminarCliente("555C");
+				System.out.println("Cliente con DNI 555C eliminado");
+				break;
+
+			case 9:
+
+				gestor.eliminarLibro(101);
+				System.out.println("Libro con codigo 101 eliminado");
+				break;
+
+			case 10:
+				System.out.println("Saliendo del programa.");
+				break;
+
+			default:
+				System.out.println("Opcion no contemplada");
+			}
+
+		} while (opcion != 10);
+
+		sc.close();
 	}
-
 }
